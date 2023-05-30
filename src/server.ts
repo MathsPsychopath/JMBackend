@@ -1,6 +1,6 @@
 import Hapi from "@hapi/hapi";
 
-const init = async () => {
+export async function createServer() {
   const server = Hapi.server({
     port: 3000,
     host: "localhost",
@@ -16,9 +16,12 @@ const init = async () => {
 
   await server.start();
   console.log("Server running on %s", server.info.uri);
-};
+  return server;
+}
 
-init().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+if (require.main === module) {
+  createServer().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}
