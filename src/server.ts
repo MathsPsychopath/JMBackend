@@ -10,7 +10,7 @@ const init = async () => {
     method: "GET",
     path: "/",
     handler: (request, h) => {
-      return "Hello, Hapi.js!";
+      return "Hello, Hapi.js!!";
     },
   });
 
