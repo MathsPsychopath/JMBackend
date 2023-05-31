@@ -3,10 +3,10 @@ name: NPM Test
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
     types:
       - synchronize
       - opened
