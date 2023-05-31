@@ -1,0 +1,39 @@
+name: NPM Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - synchronize
+      - opened
+      - reopened
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test
+
+    - name: Check test status and reject PR if tests fail
+      uses: styfle/cancel-workflow-action@0.9.1
+      with:
+        check_name: 'NPM Test'
+        conclusion: 'failure'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
